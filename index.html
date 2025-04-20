@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @font-face {
             font-family: 'MartinaPlantijn';
@@ -448,6 +450,16 @@
                         class="px-3 py-2 rounded-md text-sm font-medium text-white nav-link transition-colors">Learn</a>
                     <a href="#"
                         class="px-3 py-2 rounded-md text-sm font-medium text-white nav-link transition-colors">Support</a>
+                    <a href="#" id="stressTestBtn"
+                        class="flex items-center px-2 py-2 text-black bg-[#00C805] rounded-full transition-all duration-200 group">
+                        <span class="mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                        </span>
+                        Stress Test My Portfolio
+                    </a>
                 </div>
             </div>
 
@@ -1278,6 +1290,938 @@
             });
         });
     </script>
+
+    <!-- Stress Test Modal -->
+    <div id="stressTestModal"
+        class="fixed inset-0 bg-gradient-to-br from-[#1a1f35] to-black bg-opacity-95 z-50 hidden overflow-y-auto">
+        <div class="min-h-screen px-4 py-8">
+            <div
+                class="max-w-[1200px] mx-auto bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-2xl overflow-hidden shadow-2xl border border-gray-800/20">
+                <!-- Header -->
+                <div
+                    class="flex justify-between items-center px-8 py-6 border-b border-gray-800/30 bg-gradient-to-r from-[#1E2124] to-[#1a1f35]">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl font-medium text-white text-shadow-sm">Portfolio Stress Test</h3>
+                    </div>
+                    <button id="closeStressTest"
+                        class="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Input Page -->
+                <div id="inputPage" class="flex flex-col space-y-6 p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-2xl font-bold text-white text-shadow-sm">Select Your Assets</h2>
+                        <button id="runStressTest"
+                            class="relative overflow-hidden group bg-gradient-to-r from-[#00C805] to-[#009605] text-black font-semibold px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#00C805]/20">
+                            <span class="relative z-10">Run Stress Test</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-[#00E805] to-[#00B605] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Asset Type Sections -->
+                    <div class="grid grid-cols-1 gap-6">
+                        <!-- Stocks Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">📈</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Stocks</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Mutual Funds Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">💼</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Mutual Funds</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- ETFs Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">📊</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">ETFs</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Bonds Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">📜</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Bonds</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Gold Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">🏆</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Gold</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Crypto Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">₿</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Crypto</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Real Estate Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">🏠</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Real Estate</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+
+                        <!-- Cash Section -->
+                        <div
+                            class="asset-type-container bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:border-[#00C805]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00C805]/10">
+                            <div class="flex items-center justify-between cursor-pointer select-none"
+                                onclick="toggleAssetSection(this)">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                        <span class="text-xl">💵</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Cash</h3>
+                                </div>
+                                <button
+                                    class="add-asset-btn text-[#00C805] hover:text-white transition-all duration-300 transform hover:scale-110">
+                                    <span class="text-2xl">+</span>
+                                </button>
+                            </div>
+                            <div class="asset-inputs mt-6 hidden"></div>
+                        </div>
+                    </div>
+
+                    <!-- Crisis Scenario Selection -->
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 text-shadow-sm">Select Crisis Scenario</h3>
+                        <select id="crisisScenario"
+                            class="w-full bg-gradient-to-br from-[#1E2124] to-[#141618] text-white px-4 py-3 rounded-xl border border-gray-800/30 focus:border-[#00C805]/50 focus:ring-2 focus:ring-[#00C805]/20 transition-all duration-300">
+                            <option value="2008">2008 Financial Crisis</option>
+                            <option value="2020">2020 COVID-19 Crash</option>
+                            <option value="2000">2000 Dot-com Bubble</option>
+                            <option value="1987">1987 Black Monday</option>
+                            <option value="1929">1929 Great Depression</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results Page -->
+                <div id="resultsPage" class="hidden p-8 bg-gradient-to-br from-[#1E2124] to-[#141618]">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 class="text-2xl font-semibold text-white text-shadow-sm">Stress Test Results</h2>
+                            <p class="text-gray-400 mt-1">Overall Portfolio Health: <span
+                                    class="text-[#00C805] font-semibold">78%</span></p>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button id="backToInput"
+                                class="px-6 py-2.5 text-[#00C805] border border-[#00C805] rounded-full hover:bg-[#00C805]/10 transition-all duration-300 transform hover:scale-105">
+                                Edit Portfolio
+                            </button>
+                            <button id="rerunTest"
+                                class="px-6 py-2.5 bg-gradient-to-r from-[#00C805] to-[#009605] text-black rounded-full hover:shadow-lg hover:shadow-[#00C805]/20 transition-all duration-300 transform hover:scale-105">
+                                Re-run Test
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Left Column -->
+                        <div class="space-y-8">
+                            <!-- Risk Analysis -->
+                            <div
+                                class="bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:shadow-lg hover:shadow-[#00C805]/10 transition-all duration-300">
+                                <h3 class="text-xl font-semibold text-white mb-6 text-shadow-sm">Risk Analysis</h3>
+                                <!-- Risk Score -->
+                                <div class="space-y-6">
+                                    <div class="risk-metric">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-gray-400">Risk Score</span>
+                                            <span class="text-white font-medium">7.2/10</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-[#00C805] via-yellow-500 to-red-500 transition-all duration-500"
+                                                style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Diversification -->
+                                    <div class="risk-metric">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-gray-400">Diversification</span>
+                                            <span class="text-white font-medium">6.5/10</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-[#00C805] transition-all duration-500"
+                                                style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Market Sensitivity -->
+                                    <div class="risk-metric">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-gray-400">Market Sensitivity (Beta)</span>
+                                            <span class="text-white font-medium">1.2</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-[#00C805] transition-all duration-500"
+                                                style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Crisis Resilience -->
+                                    <div class="risk-metric">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-gray-400">Crisis Resilience</span>
+                                            <span class="text-white font-medium">8.1/10</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-[#00C805] transition-all duration-500"
+                                                style="width: 81%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio Distribution -->
+                            <div
+                                class="bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:shadow-lg hover:shadow-[#00C805]/10 transition-all duration-300">
+                                <h3 class="text-xl font-semibold text-white mb-6 text-shadow-sm">Portfolio Distribution
+                                </h3>
+                                <div class="relative" style="height: 250px;">
+                                    <canvas id="portfolioChart"></canvas>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 mt-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-[#00C805]"></div>
+                                        <span class="text-gray-400 text-sm">Stocks (45%)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-[#4CAF50]"></div>
+                                        <span class="text-gray-400 text-sm">Bonds (20%)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-[#81C784]"></div>
+                                        <span class="text-gray-400 text-sm">Real Estate (15%)</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-[#A5D6A7]"></div>
+                                        <span class="text-gray-400 text-sm">Cash (20%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-8">
+                            <!-- Crisis Performance -->
+                            <div
+                                class="bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:shadow-lg hover:shadow-[#00C805]/10 transition-all duration-300">
+                                <h3 class="text-xl font-semibold text-white mb-6 text-shadow-sm">Crisis Performance
+                                    Simulation</h3>
+                                <div class="flex justify-between mb-8">
+                                    <div class="text-center">
+                                        <p class="text-red-500 text-3xl font-bold mb-2">-28.5%</p>
+                                        <p class="text-gray-400 text-sm">Maximum Drawdown</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-[#00C805] text-3xl font-bold mb-2">1.8 years</p>
+                                        <p class="text-gray-400 text-sm">Recovery Time</p>
+                                    </div>
+                                </div>
+                                <div class="relative" style="height: 200px;">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-400 mt-2">
+                                    <span>Crisis Start</span>
+                                    <span>Recovery</span>
+                                </div>
+                            </div>
+
+                            <!-- Strategic Recommendations -->
+                            <div
+                                class="bg-gradient-to-br from-[#1E2124] to-[#141618] rounded-xl p-6 border border-gray-800/30 hover:shadow-lg hover:shadow-[#00C805]/10 transition-all duration-300">
+                                <h3 class="text-xl font-semibold text-white mb-6 text-shadow-sm">Strategic
+                                    Recommendations</h3>
+                                <div class="space-y-4">
+                                    <div
+                                        class="p-4 bg-gradient-to-br from-[#2A2D31] to-[#1E2124] rounded-lg border border-gray-800/30 hover:border-[#00C805]/30 transition-all duration-300">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                                <span class="text-white text-lg">⚠️</span>
+                                            </div>
+                                            <h4 class="text-[#00C805] font-medium">High Concentration Risk</h4>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Consider reducing exposure to tech sector
+                                            stocks to improve diversification.</p>
+                                    </div>
+                                    <div
+                                        class="p-4 bg-gradient-to-br from-[#2A2D31] to-[#1E2124] rounded-lg border border-gray-800/30 hover:border-[#00C805]/30 transition-all duration-300">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                                <span class="text-white text-lg">💡</span>
+                                            </div>
+                                            <h4 class="text-[#00C805] font-medium">Defensive Strategy</h4>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Add more defensive assets like consumer staples
+                                            or utilities to reduce volatility.</p>
+                                    </div>
+                                    <div
+                                        class="p-4 bg-gradient-to-br from-[#2A2D31] to-[#1E2124] rounded-lg border border-gray-800/30 hover:border-[#00C805]/30 transition-all duration-300">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00C805] to-[#009605] flex items-center justify-center">
+                                                <span class="text-white text-lg">📈</span>
+                                            </div>
+                                            <h4 class="text-[#00C805] font-medium">Rebalancing Needed</h4>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Portfolio has drifted from target allocation.
+                                            Consider rebalancing to maintain risk levels.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Enhanced Animations and Effects */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 200, 5, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0);
+            }
+        }
+
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .asset-type-container {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .asset-input-row {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #runStressTest {
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* Asset input templates */
+        .asset-input-template {
+            display: none;
+        }
+
+        .asset-input-row {
+            @apply grid grid-cols-4 gap-4 mb-4 items-center;
+        }
+
+        .asset-input-row input {
+            @apply bg-[#1E2124] text-white px-3 py-2 rounded border border-gray-700 focus:border-[#00C805] focus:ring-1 focus:ring-[#00C805];
+        }
+
+        .delete-asset-btn {
+            @apply text-gray-400 hover:text-white transition-colors;
+        }
+
+        /* Loading Animation */
+        .loading-animation {
+            @apply w-5 h-5 border-2 border-[#1E2124] border-t-[#00C805] rounded-full animate-spin;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1E2124;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2A2D31;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00C805;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stressTestBtn = document.getElementById('stressTestBtn');
+            const stressTestModal = document.getElementById('stressTestModal');
+            const closeStressTest = document.getElementById('closeStressTest');
+            const runStressTest = document.getElementById('runStressTest');
+            const backToInput = document.getElementById('backToInput');
+            const inputPage = document.getElementById('inputPage');
+            const resultsPage = document.getElementById('resultsPage');
+
+            // Asset input templates
+            const assetTemplates = {
+                stocks: {
+                    fields: [
+                        'Company name/ticker',
+                        'Number of shares',
+                        'Purchase price per share',
+                        'Current price per share'
+                    ],
+                    types: ['text', 'number', 'number', 'number']
+                },
+                mutualFunds: {
+                    fields: [
+                        'Fund name/ticker',
+                        'Number of units',
+                        'Purchase price per unit',
+                        'Current price per unit'
+                    ],
+                    types: ['text', 'number', 'number', 'number']
+                },
+                etfs: {
+                    fields: [
+                        'ETF name/ticker',
+                        'Number of shares',
+                        'Purchase price per share',
+                        'Current price per share'
+                    ],
+                    types: ['text', 'number', 'number', 'number']
+                },
+                bonds: {
+                    fields: [
+                        'Bond name',
+                        'Face value',
+                        'Coupon rate (%)',
+                        'Maturity date',
+                        'Current yield (%)'
+                    ],
+                    types: ['text', 'number', 'number', 'date', 'number']
+                },
+                gold: {
+                    fields: [
+                        'Weight (grams/ounces)',
+                        'Purchase price per unit',
+                        'Current price per unit'
+                    ],
+                    types: ['number', 'number', 'number']
+                },
+                crypto: {
+                    fields: [
+                        'Cryptocurrency name',
+                        'Quantity',
+                        'Purchase price per coin',
+                        'Current price per coin'
+                    ],
+                    types: ['text', 'number', 'number', 'number']
+                },
+                realEstate: {
+                    fields: [
+                        'Property description',
+                        'Purchase value',
+                        'Current estimated value'
+                    ],
+                    types: ['text', 'number', 'number']
+                },
+                cash: {
+                    fields: [
+                        'Currency',
+                        'Amount'
+                    ],
+                    types: ['text', 'number']
+                }
+            };
+
+            function createInputRow(assetType) {
+                const template = assetTemplates[assetType];
+                const row = document.createElement('div');
+                row.className = 'asset-input-row grid gap-4 mb-4 items-center';
+                row.style.gridTemplateColumns = `repeat(${template.fields.length}, 1fr) auto`;
+
+                template.fields.forEach((field, index) => {
+                    const inputContainer = document.createElement('div');
+                    inputContainer.className = 'flex flex-col space-y-2';
+
+                    const label = document.createElement('label');
+                    label.className = 'text-sm text-gray-400';
+                    label.textContent = field;
+
+                    const input = document.createElement('input');
+                    input.type = template.types[index];
+                    input.className = 'w-full bg-[#1E2124] text-white px-3 py-2 rounded-lg border border-gray-700 focus:border-[#00C805] focus:ring-1 focus:ring-[#00C805] transition-all duration-200';
+
+                    if (template.types[index] === 'number') {
+                        input.min = '0';
+                        input.step = 'any';
+                    }
+
+                    inputContainer.appendChild(label);
+                    inputContainer.appendChild(input);
+                    row.appendChild(inputContainer);
+                });
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-asset-btn text-red-500 hover:text-red-400 transition-colors self-end';
+                deleteBtn.innerHTML = '<span class="text-2xl">×</span>';
+                deleteBtn.onclick = () => {
+                    row.remove();
+                    const container = row.closest('.asset-type-container');
+                    const inputsSection = container.querySelector('.asset-inputs');
+                    if (inputsSection.children.length === 0) {
+                        inputsSection.classList.add('hidden');
+                    }
+                };
+                row.appendChild(deleteBtn);
+
+                return row;
+            }
+
+            // Add event listeners
+            document.querySelectorAll('.add-asset-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering the parent's click event
+                    const container = btn.closest('.asset-type-container');
+                    const assetType = container.querySelector('h3').textContent.toLowerCase().replace(/\s+/g, '');
+                    const inputsSection = container.querySelector('.asset-inputs');
+
+                    inputsSection.classList.remove('hidden');
+                    const newRow = createInputRow(assetType);
+                    inputsSection.appendChild(newRow);
+                });
+            });
+
+            stressTestBtn.addEventListener('click', () => {
+                stressTestModal.classList.remove('hidden');
+                inputPage.classList.remove('hidden');
+                resultsPage.classList.add('hidden');
+            });
+
+            closeStressTest.addEventListener('click', () => {
+                stressTestModal.classList.add('hidden');
+            });
+
+            runStressTest.addEventListener('click', () => {
+                const btn = runStressTest;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<div class="loading-animation mx-auto"></div>';
+
+                setTimeout(() => {
+                    inputPage.classList.add('hidden');
+                    resultsPage.classList.remove('hidden');
+                    btn.innerHTML = originalText;
+
+                    // Initialize charts
+                    initializeCharts();
+                }, 1500);
+            });
+
+            backToInput.addEventListener('click', () => {
+                resultsPage.classList.add('hidden');
+                inputPage.classList.remove('hidden');
+            });
+
+            function initializeCharts() {
+                // Portfolio Distribution Chart
+                const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+                new Chart(portfolioCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Stocks', 'Bonds', 'Real Estate', 'Cash'],
+                        datasets: [{
+                            data: [45, 20, 15, 20],
+                            backgroundColor: [
+                                '#00C805',
+                                '#4CAF50',
+                                '#81C784',
+                                '#A5D6A7'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                // Performance Chart
+                const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+                new Chart(performanceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Start', 'Crisis', 'Bottom', 'Recovery', 'Current'],
+                        datasets: [{
+                            label: 'Portfolio Value',
+                            data: [100, 90, 71.5, 85, 100],
+                            borderColor: '#00C805',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        // Add this function to your existing JavaScript
+        function toggleAssetSection(element) {
+            const container = element.closest('.asset-type-container');
+            const inputsSection = container.querySelector('.asset-inputs');
+            const wasHidden = inputsSection.classList.contains('hidden');
+
+            // Close all other sections
+            document.querySelectorAll('.asset-inputs').forEach(section => {
+                if (section !== inputsSection) {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // Toggle current section
+            if (wasHidden) {
+                inputsSection.classList.remove('hidden');
+            } else {
+                inputsSection.classList.add('hidden');
+            }
+        }
+    </script>
+
+    <style>
+        /* Add these styles to your existing CSS */
+        .asset-input-row {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .asset-type-container {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .asset-type-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .add-asset-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .delete-asset-btn:hover {
+            transform: scale(1.1);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 200, 5, 0.2);
+        }
+    </style>
+
+    <!-- Add before closing body tag -->
+    <script>
+        // Initialize charts when the stress test results are shown
+        document.getElementById('runStressTest').addEventListener('click', function () {
+            document.getElementById('inputPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.remove('hidden');
+
+            // Initialize Portfolio Distribution Chart
+            const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+            const portfolioChart = new Chart(portfolioCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Stocks', 'Bonds', 'Real Estate', 'Cash'],
+                    datasets: [{
+                        data: [45, 20, 15, 20],
+                        backgroundColor: [
+                            '#00C805',
+                            '#4CAF50',
+                            '#81C784',
+                            '#A5D6A7'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                }
+            });
+
+            // Initialize Performance Chart
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            const performanceChart = new Chart(performanceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Crisis', 'Bottom', 'Recovery', 'Current'],
+                    datasets: [{
+                        label: 'Portfolio Value',
+                        data: [100, 90, 71.5, 85, 100],
+                        borderColor: '#00C805',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            display: false,
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Handle "Edit Portfolio" button click
+        document.getElementById('backToInput').addEventListener('click', function () {
+            document.getElementById('resultsPage').classList.add('hidden');
+            document.getElementById('inputPage').classList.remove('hidden');
+        });
+
+        // Handle "Re-run Test" button click
+        document.getElementById('rerunTest').addEventListener('click', function () {
+            // Add animation or loading state here if needed
+            setTimeout(() => {
+                // Trigger the charts reinitialization
+                document.getElementById('runStressTest').click();
+            }, 1000);
+        });
+    </script>
+
+    <style>
+        /* Add pulsing animation for the button */
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(0, 200, 5, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0);
+            }
+        }
+
+        #stressTestBtn {
+            animation: pulse-border 2s infinite;
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(0, 200, 5, 0.3);
+        }
+
+        #stressTestBtn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 200, 5, 0.4);
+        }
+    </style>
 </body>
 
 </html>
