@@ -418,7 +418,8 @@
                     </svg>
                 </a>
 
-                <div class="hidden md:flex space-x-2 ">
+                <!-- Navigation items for large screens (1280px and up) -->
+                <div class="hidden xl:flex space-x-2">
                     <div class="relative">
                         <button id="whatWeOfferBtn"
                             class="px-3 py-2 rounded-md text-sm font-medium text-white transition-colors flex items-center nav-link">
@@ -451,7 +452,7 @@
                     <a href="#"
                         class="px-3 py-2 rounded-md text-sm font-medium text-white nav-link transition-colors">Support</a>
                     <a href="#" id="stressTestBtn"
-                        class="flex items-center px-2 py-2 text-black bg-[#00C805] rounded-full transition-all duration-200 group">
+                        class="flex items-center px-4 py-2 text-black bg-[#00C805] rounded-full transition-all duration-200 group">
                         <span class="mr-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -463,42 +464,93 @@
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center space-x-4">
-                <div class="relative">
-                    <button id="countryBtn"
-                        class="px-3 py-2 rounded-md text-sm font-medium text-white transition-colors flex items-center nav-link country-selector">
-                        US
-                        <svg class="w-4 h-4 ml-1 chevron-down" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div id="countryDropdown" class="dropdown-menu absolute right-0 mt-2 hidden">
-                        <a href="#" class="dropdown-item">UK</a>
-                        <a href="#" class="dropdown-item">EU</a>
+            <!-- Right side navigation -->
+            <div class="flex items-center space-x-4">
+                <!-- Country selector and auth buttons for large screens -->
+                <div class="hidden xl:flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="countryBtn"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-white transition-colors flex items-center nav-link country-selector">
+                            US
+                            <svg class="w-4 h-4 ml-1 chevron-down" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+                        <div id="countryDropdown" class="dropdown-menu absolute right-0 mt-2 hidden">
+                            <a href="#" class="dropdown-item">UK</a>
+                            <a href="#" class="dropdown-item">EU</a>
+                        </div>
                     </div>
+
+                    <a href="#"
+                        class="px-7 py-2 rounded-full text-sm font-medium border border-[rgb(204,255,0)] text-[rgb(204,255,0)] hover:bg-white/10 transition-colors">
+                        Log in
+                    </a>
+
+                    <a href="#"
+                        class="px-7 py-2.5 rounded-full text-sm font-medium bg-robinhood-green text-black hover:bg-opacity-90 transition-colors">
+                        Sign up
+                    </a>
                 </div>
 
-                <a href="#"
-                    class="px-7 py-2 rounded-full text-sm font-medium border border-[rgb(204,255,0)] text-[rgb(204,255,0)] hover:bg-white/10 transition-colors">
-                    Log in
-                </a>
+                <!-- Simplified navigation for laptop screens (1024px to 1279px) -->
+                <div class="hidden lg:flex xl:hidden items-center space-x-4">
+                    <a href="#" id="stressTestBtnMobile"
+                        class="flex items-center px-4 py-2 text-black bg-[#00C805] rounded-full transition-all duration-200 group">
+                        <span class="mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                        </span>
+                        Stress Test
+                    </a>
+                    <div class="relative">
+                        <button id="countryBtnMobile"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-white transition-colors flex items-center nav-link">
+                            US
+                            <svg class="w-4 h-4 ml-1 chevron-down" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <a href="#"
+                        class="px-5 py-2 rounded-full text-sm font-medium bg-robinhood-green text-black hover:bg-opacity-90 transition-colors">
+                        Sign up
+                    </a>
+                    <button class="text-white hover:text-gray-300">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
 
-                <a href="#"
-                    class="px-7 py-2.5 rounded-full text-sm font-medium bg-robinhood-green text-black hover:bg-opacity-90 transition-colors">
-                    Sign up
-                </a>
-            </div>
-
-            <div class="md:hidden flex items-center">
-                <button
-                    class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
+                <!-- Mobile menu button and stress test (visible on screens smaller than 1024px) -->
+                <div class="lg:hidden flex items-center space-x-3">
+                    <a href="#" id="stressTestBtnMobileSmall"
+                        class="flex items-center px-3 py-2 text-black bg-[#00C805] rounded-full transition-all duration-200 group">
+                        <span class="mr-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                        </span>
+                        Test
+                    </a>
+                    <button
+                        class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -1251,6 +1303,166 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Get all stress test buttons
+            const stressTestBtn = document.getElementById('stressTestBtn');
+            const stressTestBtnMobile = document.getElementById('stressTestBtnMobile');
+            const stressTestBtnMobileSmall = document.getElementById('stressTestBtnMobileSmall');
+            const stressTestModal = document.getElementById('stressTestModal');
+            const closeStressTest = document.getElementById('closeStressTest');
+            const runStressTest = document.getElementById('runStressTest');
+            const backToInput = document.getElementById('backToInput');
+            const inputPage = document.getElementById('inputPage');
+            const resultsPage = document.getElementById('resultsPage');
+
+            // Function to open stress test modal
+            function openStressTest() {
+                stressTestModal.classList.remove('hidden');
+                inputPage.classList.remove('hidden');
+                resultsPage.classList.add('hidden');
+            }
+
+            // Add click event listeners to all stress test buttons
+            [stressTestBtn, stressTestBtnMobile, stressTestBtnMobileSmall].forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        openStressTest();
+                    });
+                }
+            });
+
+            closeStressTest.addEventListener('click', () => {
+                stressTestModal.classList.add('hidden');
+            });
+
+            runStressTest.addEventListener('click', () => {
+                const btn = runStressTest;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<div class="loading-animation mx-auto"></div>';
+
+                setTimeout(() => {
+                    inputPage.classList.add('hidden');
+                    resultsPage.classList.remove('hidden');
+                    btn.innerHTML = originalText;
+
+                    // Initialize charts
+                    initializeCharts();
+                }, 1500);
+            });
+
+            backToInput.addEventListener('click', () => {
+                resultsPage.classList.add('hidden');
+                inputPage.classList.remove('hidden');
+            });
+
+            // Rest of your existing JavaScript...
+            // ... (keep all the existing chart initialization and other functionality) ...
+        });
+    </script>
+
+    <style>
+        /* Enhanced Animations and Effects */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 200, 5, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0);
+            }
+        }
+
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .asset-type-container {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .asset-input-row {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #runStressTest {
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* Asset input templates */
+        .asset-input-template {
+            display: none;
+        }
+
+        .asset-input-row {
+            @apply grid grid-cols-4 gap-4 mb-4 items-center;
+        }
+
+        .asset-input-row input {
+            @apply bg-[#1E2124] text-white px-3 py-2 rounded border border-gray-700 focus:border-[#00C805] focus:ring-1 focus:ring-[#00C805];
+        }
+
+        .delete-asset-btn {
+            @apply text-gray-400 hover:text-white transition-colors;
+        }
+
+        /* Loading Animation */
+        .loading-animation {
+            @apply w-5 h-5 border-2 border-[#1E2124] border-t-[#00C805] rounded-full animate-spin;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1E2124;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2A2D31;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00C805;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const dropdownBtn = document.getElementById('whatWeOfferBtn');
             const dropdownMenu = document.getElementById('whatWeOfferDropdown');
             const dropdownIcon = dropdownBtn.querySelector('.chevron-icon');
@@ -1689,367 +1901,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        /* Enhanced Animations and Effects */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(0, 200, 5, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 200, 5, 0);
-            }
-        }
-
-        .text-shadow-sm {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .asset-type-container {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .asset-input-row {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        #runStressTest {
-            animation: pulseGlow 2s infinite;
-        }
-
-        /* Asset input templates */
-        .asset-input-template {
-            display: none;
-        }
-
-        .asset-input-row {
-            @apply grid grid-cols-4 gap-4 mb-4 items-center;
-        }
-
-        .asset-input-row input {
-            @apply bg-[#1E2124] text-white px-3 py-2 rounded border border-gray-700 focus:border-[#00C805] focus:ring-1 focus:ring-[#00C805];
-        }
-
-        .delete-asset-btn {
-            @apply text-gray-400 hover:text-white transition-colors;
-        }
-
-        /* Loading Animation */
-        .loading-animation {
-            @apply w-5 h-5 border-2 border-[#1E2124] border-t-[#00C805] rounded-full animate-spin;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .grid-cols-2 {
-                grid-template-columns: 1fr;
-            }
-
-            .chart-container {
-                height: 200px;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1E2124;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #2A2D31;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00C805;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const stressTestBtn = document.getElementById('stressTestBtn');
-            const stressTestModal = document.getElementById('stressTestModal');
-            const closeStressTest = document.getElementById('closeStressTest');
-            const runStressTest = document.getElementById('runStressTest');
-            const backToInput = document.getElementById('backToInput');
-            const inputPage = document.getElementById('inputPage');
-            const resultsPage = document.getElementById('resultsPage');
-
-            // Asset input templates
-            const assetTemplates = {
-                stocks: {
-                    fields: [
-                        'Company name/ticker',
-                        'Number of shares',
-                        'Purchase price per share',
-                        'Current price per share'
-                    ],
-                    types: ['text', 'number', 'number', 'number']
-                },
-                mutualFunds: {
-                    fields: [
-                        'Fund name/ticker',
-                        'Number of units',
-                        'Purchase price per unit',
-                        'Current price per unit'
-                    ],
-                    types: ['text', 'number', 'number', 'number']
-                },
-                etfs: {
-                    fields: [
-                        'ETF name/ticker',
-                        'Number of shares',
-                        'Purchase price per share',
-                        'Current price per share'
-                    ],
-                    types: ['text', 'number', 'number', 'number']
-                },
-                bonds: {
-                    fields: [
-                        'Bond name',
-                        'Face value',
-                        'Coupon rate (%)',
-                        'Maturity date',
-                        'Current yield (%)'
-                    ],
-                    types: ['text', 'number', 'number', 'date', 'number']
-                },
-                gold: {
-                    fields: [
-                        'Weight (grams/ounces)',
-                        'Purchase price per unit',
-                        'Current price per unit'
-                    ],
-                    types: ['number', 'number', 'number']
-                },
-                crypto: {
-                    fields: [
-                        'Cryptocurrency name',
-                        'Quantity',
-                        'Purchase price per coin',
-                        'Current price per coin'
-                    ],
-                    types: ['text', 'number', 'number', 'number']
-                },
-                realEstate: {
-                    fields: [
-                        'Property description',
-                        'Purchase value',
-                        'Current estimated value'
-                    ],
-                    types: ['text', 'number', 'number']
-                },
-                cash: {
-                    fields: [
-                        'Currency',
-                        'Amount'
-                    ],
-                    types: ['text', 'number']
-                }
-            };
-
-            function createInputRow(assetType) {
-                const template = assetTemplates[assetType];
-                const row = document.createElement('div');
-                row.className = 'asset-input-row grid gap-4 mb-4 items-center';
-                row.style.gridTemplateColumns = `repeat(${template.fields.length}, 1fr) auto`;
-
-                template.fields.forEach((field, index) => {
-                    const inputContainer = document.createElement('div');
-                    inputContainer.className = 'flex flex-col space-y-2';
-
-                    const label = document.createElement('label');
-                    label.className = 'text-sm text-gray-400';
-                    label.textContent = field;
-
-                    const input = document.createElement('input');
-                    input.type = template.types[index];
-                    input.className = 'w-full bg-[#1E2124] text-white px-3 py-2 rounded-lg border border-gray-700 focus:border-[#00C805] focus:ring-1 focus:ring-[#00C805] transition-all duration-200';
-
-                    if (template.types[index] === 'number') {
-                        input.min = '0';
-                        input.step = 'any';
-                    }
-
-                    inputContainer.appendChild(label);
-                    inputContainer.appendChild(input);
-                    row.appendChild(inputContainer);
-                });
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-asset-btn text-red-500 hover:text-red-400 transition-colors self-end';
-                deleteBtn.innerHTML = '<span class="text-2xl">×</span>';
-                deleteBtn.onclick = () => {
-                    row.remove();
-                    const container = row.closest('.asset-type-container');
-                    const inputsSection = container.querySelector('.asset-inputs');
-                    if (inputsSection.children.length === 0) {
-                        inputsSection.classList.add('hidden');
-                    }
-                };
-                row.appendChild(deleteBtn);
-
-                return row;
-            }
-
-            // Add event listeners
-            document.querySelectorAll('.add-asset-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent triggering the parent's click event
-                    const container = btn.closest('.asset-type-container');
-                    const assetType = container.querySelector('h3').textContent.toLowerCase().replace(/\s+/g, '');
-                    const inputsSection = container.querySelector('.asset-inputs');
-
-                    inputsSection.classList.remove('hidden');
-                    const newRow = createInputRow(assetType);
-                    inputsSection.appendChild(newRow);
-                });
-            });
-
-            stressTestBtn.addEventListener('click', () => {
-                stressTestModal.classList.remove('hidden');
-                inputPage.classList.remove('hidden');
-                resultsPage.classList.add('hidden');
-            });
-
-            closeStressTest.addEventListener('click', () => {
-                stressTestModal.classList.add('hidden');
-            });
-
-            runStressTest.addEventListener('click', () => {
-                const btn = runStressTest;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<div class="loading-animation mx-auto"></div>';
-
-                setTimeout(() => {
-                    inputPage.classList.add('hidden');
-                    resultsPage.classList.remove('hidden');
-                    btn.innerHTML = originalText;
-
-                    // Initialize charts
-                    initializeCharts();
-                }, 1500);
-            });
-
-            backToInput.addEventListener('click', () => {
-                resultsPage.classList.add('hidden');
-                inputPage.classList.remove('hidden');
-            });
-
-            function initializeCharts() {
-                // Portfolio Distribution Chart
-                const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
-                new Chart(portfolioCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Stocks', 'Bonds', 'Real Estate', 'Cash'],
-                        datasets: [{
-                            data: [45, 20, 15, 20],
-                            backgroundColor: [
-                                '#00C805',
-                                '#4CAF50',
-                                '#81C784',
-                                '#A5D6A7'
-                            ],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '70%',
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-
-                // Performance Chart
-                const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-                new Chart(performanceCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Start', 'Crisis', 'Bottom', 'Recovery', 'Current'],
-                        datasets: [{
-                            label: 'Portfolio Value',
-                            data: [100, 90, 71.5, 85, 100],
-                            borderColor: '#00C805',
-                            borderWidth: 2,
-                            fill: false,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            x: {
-                                display: false
-                            },
-                            y: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            }
-        });
-
-        // Add this function to your existing JavaScript
-        function toggleAssetSection(element) {
-            const container = element.closest('.asset-type-container');
-            const inputsSection = container.querySelector('.asset-inputs');
-            const wasHidden = inputsSection.classList.contains('hidden');
-
-            // Close all other sections
-            document.querySelectorAll('.asset-inputs').forEach(section => {
-                if (section !== inputsSection) {
-                    section.classList.add('hidden');
-                }
-            });
-
-            // Toggle current section
-            if (wasHidden) {
-                inputsSection.classList.remove('hidden');
-            } else {
-                inputsSection.classList.add('hidden');
-            }
-        }
-    </script>
 
     <style>
         /* Add these styles to your existing CSS */
